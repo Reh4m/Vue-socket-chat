@@ -1,0 +1,46 @@
+
+type User {
+  _id: ID
+  username: String!
+  email: String!
+  password: String!
+  avatar: String
+  joinDate: String
+  chatRoom: [ChatRoom]
+}
+
+type ChatRoom {
+  _id: ID
+  title: String!
+  description: String!
+  createdBy: User!
+  createdDate: String
+  participants: User!
+  messages: [Message]
+}
+
+type Message {
+  _id: ID!
+  messageBody: String!
+  createdDate: String!
+  MessageUser: User!
+}
+
+type ChatPage {
+  posts: [ChatRoom]
+  hasMore: Boolean
+}
+
+type Token {
+  token: String!
+}
+
+type Query {
+  getCurrentUser: User
+  getUser(userId: ID!): User
+}
+
+type Mutation {
+  signinUser(username: String!, password: String!): Token
+  signupUser(username: String!, email: String!, password: String!): Token
+}
